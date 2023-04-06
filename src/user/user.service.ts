@@ -15,8 +15,8 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async createUser(body: createUserDto): Promise<UserSignResponse> {
-    const user = await this.userRepository.find({
+  async createUser(body: createUserDto): Promise<User> {
+    const user = await this.userRepository.findOne({
       where: { email: body.email },
     });
     if (user) {
@@ -28,11 +28,11 @@ export class UserService {
         HttpStatus.BAD_REQUEST,
       );
     }
-
+    //bcrypt.hash(body.password, 10),
     const newUser = {
       id: randomUUID(),
       email: body.email,
-      password: bcrypt.hash(body.password, 10),
+      password: body.password,
       name: body.name ? body.name : 'Anon',
       avatarUrl:
         'http://res.cloudinary.com/nazdac/image/upload/v1616652013/travelAppFolder/dmlfcuvyr79gpkbgg639.jpg',
@@ -62,11 +62,25 @@ export class UserService {
       name: body.name ? body.name : user.name,
       email: body.email ? body.email : user.email,
       password: body.password ? bcrypt.hash(body.password, 10) : user.password,
-      avatarUrl: body.avatarUrl ? body.avatarUrl : user.avatarURL,
+      avatarUrl: body.avatarUrl ? body.avatarUrl : user.avatarUrl,
     };
 
     const newUser = await this.userRepository.save(updatedUser);
 
     return newUser;
   }
+
+  // async getUser(userId: string): Promise<User> {
+  //   const user = await this.userRepository.findOne({ where: { id: userId } });
+  //   if (!user) {
+  //     throw new HttpException(
+  //       {
+  //         error: 'User not found',
+  //         status: HttpStatus.NOT_FOUND,
+  //       },
+  //       HttpStatus.NOT_FOUND,
+  //     );
+  //   }
+  //   return user;
+  // }
 }

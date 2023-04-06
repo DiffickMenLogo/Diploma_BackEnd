@@ -19,10 +19,15 @@ export class UserEntity {
     default:
       'http://res.cloudinary.com/nazdac/image/upload/v1616652013/travelAppFolder/dmlfcuvyr79gpkbgg639.jpg',
   })
-  avatarURL: string;
+  avatarUrl: string;
 
-  async checkPass(password: string) {
-    return await bycrypt.compare(this.password, password);
+  // async checkPass(password: string) {
+  //   return await bycrypt.compare(this.password, password);
+  // }
+
+  toResponseObject() {
+    const { id, name, email } = this;
+    return { id, name, email };
   }
 }
 
