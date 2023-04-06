@@ -9,7 +9,7 @@ async function bootstrap() {
   const PORT = Number(process.env.PORT) || 4000;
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  await app.listen(3000);
+  await app.listen(PORT);
   app.useGlobalPipes(new ValidationPipe());
 }
 bootstrap();
