@@ -3,7 +3,7 @@ import { SettingsEntity } from './entities/settings.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserSettings } from 'src/types/User';
+import { UserSettings } from 'src/types/user';
 import { UpdateSettingsDto } from './dto/updateSettingsDto';
 
 @Injectable()
