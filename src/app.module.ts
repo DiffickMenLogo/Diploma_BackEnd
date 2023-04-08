@@ -1,7 +1,11 @@
 import { StatisticsModule } from './statistics/statistics.module';
 import { AllWordsModule } from './all-words/all-words.module';
 import { dataSourceOptions } from './ormconfig';
-import { Module, OnApplicationBootstrap } from '@nestjs/common';
+import {
+  Module,
+  OnApplicationBootstrap,
+  MiddlewareConsumer,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
@@ -12,12 +16,18 @@ import { WordsModule } from './userWords/userWords.module';
 import { AllWordService } from './all-words/all-words.service';
 import { ConfigModule } from '@nestjs/config';
 import { JwtMiddlewareModule } from './middleware/JwtMiddleware/jwt.middleware.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '../.env',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), 'files'),
+      exclude: ['/api*'], // optional: exclude API routes from static file serving
     }),
     TypeOrmModule.forRoot(dataSourceOptions),
     AuthModule,
