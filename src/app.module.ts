@@ -25,7 +25,7 @@ import { JwtMiddlewareModule } from './middleware/JwtMiddleware/jwt.middleware.m
     SettingsModule,
     StatisticsModule,
     WordsModule,
-    //AllWordsModule,
+    AllWordsModule,
     JwtMiddlewareModule,
   ],
   controllers: [AppController],
