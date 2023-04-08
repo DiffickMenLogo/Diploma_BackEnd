@@ -13,12 +13,9 @@ export class StatisticsService {
     private readonly statisticsRepository: Repository<StatisticsEntity>,
   ) {}
 
-  async createStatistics(
-    body: CreateStatisticsDto,
-    id: string,
-  ): Promise<UserStatistic> {
+  async createStatistics(body: CreateStatisticsDto): Promise<UserStatistic> {
     const newStat = {
-      userId: id,
+      userId: body.userId,
       gameName: body.gameName,
       totalWords: body.totalWords,
       correctPercent: body.correctPercent,

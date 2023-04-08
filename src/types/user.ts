@@ -6,6 +6,11 @@ export interface User {
   avatarUrl: string;
 }
 
+export interface UserResponse {
+  name: string;
+  email: string;
+}
+
 export interface UserSignResponse {
   id: string;
   name: string;

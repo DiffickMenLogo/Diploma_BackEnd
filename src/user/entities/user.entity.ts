@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import * as bycrypt from 'bcryptjs';
+import * as bcrypt from 'bcryptjs';
 
 @Entity('user')
 export class UserEntity {
@@ -21,13 +21,13 @@ export class UserEntity {
   })
   avatarUrl: string;
 
-  // async checkPass(password: string) {
-  //   return await bycrypt.compare(this.password, password);
-  // }
+  async validatePassword(password: string) {
+    return await bcrypt.compare(password, this.password);
+  }
 
   toResponseObject() {
-    const { id, name, email } = this;
-    return { id, name, email };
+    const { name, email } = this;
+    return { name, email };
   }
 }
 
