@@ -16,7 +16,7 @@ export class JwtMiddlewareModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(JwtMiddleware)
-      .exclude('auth/signup', 'auth/signin')
+      .exclude('auth/signup', 'auth/signin', 'words')
       .forRoutes('*');
   }
 }

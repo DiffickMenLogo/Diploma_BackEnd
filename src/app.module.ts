@@ -31,12 +31,11 @@ import { JwtMiddlewareModule } from './middleware/JwtMiddleware/jwt.middleware.m
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
-// implements OnApplicationBootstrap {
-//   constructor(private wordService: AllWordService) {}
+export class AppModule implements OnApplicationBootstrap {
+  constructor(private wordService: AllWordService) {}
 
-//   async onApplicationBootstrap() {
-//     await this.wordService.seedData();
-//     console.log('Data seeding complete');
-//   }
-// }
+  async onApplicationBootstrap() {
+    await this.wordService.seedData();
+    console.log('Data seeding complete');
+  }
+}
