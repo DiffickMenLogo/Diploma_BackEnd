@@ -1,3 +1,4 @@
+import { FilesModule } from './fileshandler/fileshandler.module';
 import { StatisticsModule } from './statistics/statistics.module';
 import { AllWordsModule } from './all-words/all-words.module';
 import { dataSourceOptions } from './ormconfig';
@@ -25,11 +26,16 @@ import { join } from 'path';
       isGlobal: true,
       envFilePath: '../.env',
     }),
-    ServeStaticModule.forRoot({
-      rootPath: join(process.cwd(), 'files'),
-      exclude: ['/api*'], // optional: exclude API routes from static file serving
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'files'),
+    //   exclude: ['*'],
+    //   serveStaticOptions: {
+    //     index: false,
+    //     redirect: false,
+    //   },
+    // }),
     TypeOrmModule.forRoot(dataSourceOptions),
+    FilesModule,
     AuthModule,
     UserModule,
     SettingsModule,
