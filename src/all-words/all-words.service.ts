@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as fs from 'fs';
@@ -37,12 +37,21 @@ export class AllWordService {
   }
 
   async getAllWords(page: number, group: number) {
-    const allWords = await this.wordRepository.find({
-      where: {
-        page,
-        group,
-      },
-    });
-    return allWords;
+    try{
+      const allWords = await this.wordRepository.find({
+        where: {
+          page,
+          group,
+        },
+      });
+      return allWords;
+    }catch(error){
+      throw new HttpException(
+        {
+          error: 'Get all words err',
+          status: HttpStatus.NOT_FOUND
+        }, HttpStatus.NOT_FOUND
+      )
+    }
   }
 }
