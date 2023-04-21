@@ -40,6 +40,8 @@ export class AuthService {
       refreshToken: await this.jwtService.signAsync(payload, {
         expiresIn: process.env.JWT_REFRESH_EXPIRATION_TIME,
       }),
+      avatarURL: user.avatarUrl,
+      name: user.name
     };
   }
 
