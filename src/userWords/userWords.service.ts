@@ -13,8 +13,16 @@ export class WordsService {
   ) {}
 
   async createUserWord(word: createUserWordDto): Promise<void> {
-    const createdWord = this.wordsRepository.create(word);
+    const createdWord = await this.wordsRepository.create(word);
 
     await this.wordsRepository.save(createdWord);
+  }
+
+  async getUserWords(id: string): Promise<WordsEntity[]> {
+    const userWords = await this.wordsRepository.find({
+      where: { userId: id },
+    });
+
+    return userWords;
   }
 }

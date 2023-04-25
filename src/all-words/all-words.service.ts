@@ -37,7 +37,7 @@ export class AllWordService {
   }
 
   async getAllWords(page: number, group: number) {
-    try{
+    try {
       const allWords = await this.wordRepository.find({
         where: {
           page,
@@ -45,13 +45,14 @@ export class AllWordService {
         },
       });
       return allWords;
-    }catch(error){
+    } catch (error) {
       throw new HttpException(
         {
           error: 'Get all words err',
-          status: HttpStatus.NOT_FOUND
-        }, HttpStatus.NOT_FOUND
-      )
+          status: HttpStatus.NOT_FOUND,
+        },
+        HttpStatus.NOT_FOUND,
+      );
     }
   }
 }

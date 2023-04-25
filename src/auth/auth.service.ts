@@ -41,7 +41,7 @@ export class AuthService {
         expiresIn: process.env.JWT_REFRESH_EXPIRATION_TIME,
       }),
       avatarURL: user.avatarUrl,
-      name: user.name
+      name: user.name,
     };
   }
 
