@@ -11,7 +11,7 @@ export class UserWordsController {
     return this.userWordsService.createUserWord(body);
   }
 
-  @Get()
+  @Get('/:id')
   getUserWords(@Query() id: string) {
     return this.userWordsService.getUserWords(id);
   }

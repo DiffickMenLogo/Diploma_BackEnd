@@ -26,8 +26,8 @@ export class UserEntity {
   }
 
   toResponseObject() {
-    const { name, email } = this;
-    return { name, email };
+    const { id, name, email } = this;
+    return { id, name, email };
   }
 }
 
