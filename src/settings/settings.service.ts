@@ -21,12 +21,9 @@ export class SettingsService {
     return await this.settingsRepository.save(createdSettings);
   }
 
-  async updateSettings(
-    body: UpdateSettingsDto,
-    id: string,
-  ): Promise<UserSettings> {
+  async updateSettings(body: UpdateSettingsDto): Promise<UserSettings> {
     const userSettings = await this.settingsRepository.findOne({
-      where: { userId: id },
+      where: { userId: body.id },
     });
 
     if (!userSettings) {

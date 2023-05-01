@@ -1,7 +1,8 @@
 import { isString, IsUUID } from 'class-validator';
 
 export class UpdateSettingsDto {
-  @IsUUID()
+  id: string;
+
   userId: string;
 
   soundVolume?: number;

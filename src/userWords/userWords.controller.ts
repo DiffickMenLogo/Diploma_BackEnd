@@ -1,5 +1,5 @@
 import { createUserWordDto } from './dto/createUserWordDto';
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { WordsService } from './userWords.service';
 
 @Controller('userWords')
@@ -14,5 +14,10 @@ export class UserWordsController {
   @Get('/:id')
   getUserWords(@Query() id: string) {
     return this.userWordsService.getUserWords(id);
+  }
+
+  @Delete('/:id')
+  deleteUserWord(@Query() id: string) {
+    return this.userWordsService.deleteUserWord(id);
   }
 }

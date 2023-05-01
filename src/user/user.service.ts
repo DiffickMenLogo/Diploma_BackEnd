@@ -8,6 +8,7 @@ import { User, UserSignResponse } from 'src/types/user';
 import { Repository } from 'typeorm';
 import { randomUUID } from 'crypto';
 import * as bcrypt from 'bcryptjs';
+import { ChangeNameDto } from './dto/changeNameDto';
 
 @Injectable()
 export class UserService {
@@ -45,8 +46,8 @@ export class UserService {
     return createdUser.toResponseObject(); //fix it when add jwt
   }
 
-  async updateUser(body: UpdateUserDto, userId: string): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { id: userId } });
+  async updateName(body: ChangeNameDto): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id: body.id } });
     if (!user) {
       throw new HttpException(
         {
@@ -58,11 +59,11 @@ export class UserService {
     }
 
     const updatedUser = {
-      id: userId,
+      id: user.id,
       name: body.name ? body.name : user.name,
-      email: body.email ? body.email : user.email,
-      password: body.password ? bcrypt.hash(body.password, 10) : user.password,
-      avatarUrl: body.avatarUrl ? body.avatarUrl : user.avatarUrl,
+      email: user.email,
+      password: user.password,
+      avatarUrl: user.avatarUrl,
     };
 
     const newUser = await this.userRepository.save(updatedUser);

@@ -1,7 +1,7 @@
 import { createUserWordDto } from './dto/createUserWordDto';
 import { createUserDto } from './../user/dto/createUserDto';
 import { WordsEntity } from './entities/words.entity';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -24,5 +24,16 @@ export class WordsService {
     });
 
     return userWords;
+  }
+
+  async deleteUserWord(id: string): Promise<WordsEntity> {
+    const userWord = await this.wordsRepository.findOne({ where: { id } });
+
+    if (!userWord) {
+      throw new HttpException('Word NotFound', HttpStatus.NOT_FOUND);
+    } else {
+      await this.wordsRepository.delete(userWord);
+      return userWord;
+    }
   }
 }
