@@ -42,6 +42,7 @@ export class AuthService {
       }),
       avatarURL: user.avatarUrl,
       name: user.name,
+      id: user.id,
     };
   }
 
