@@ -21,6 +21,19 @@ export class SettingsService {
     return await this.settingsRepository.save(createdSettings);
   }
 
+  async getSettings(userId: string): Promise<UserSettings> {
+    const settings = await this.settingsRepository.findOne({
+      where: { userId },
+    });
+    if (!settings) {
+      throw new HttpException(
+        'Settings with this userId not found',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return settings;
+  }
+
   async updateSettings(body: UpdateSettingsDto): Promise<UserSettings> {
     const userSettings = await this.settingsRepository.findOne({
       where: { userId: body.id },

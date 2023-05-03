@@ -1,4 +1,4 @@
-import { Body, Controller, Put } from '@nestjs/common';
+import { Body, Controller, Get, Put, Query } from '@nestjs/common';
 import { SettingsService } from './settings.service';
 import { UpdateSettingsDto } from './dto/updateSettingsDto';
 
@@ -8,5 +8,9 @@ export class SettingsController {
   @Put()
   async changeSettings(@Body() body: UpdateSettingsDto) {
     return this.settingsService.updateSettings(body);
+  }
+  @Get(':/id')
+  async getSettings(@Query() userId: string) {
+    return this.getSettings(userId);
   }
 }
