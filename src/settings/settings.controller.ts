@@ -10,7 +10,7 @@ export class SettingsController {
     return this.settingsService.updateSettings(body);
   }
   @Get(':/id')
-  async getSettings(@Query() userId: string) {
-    return this.getSettings(userId);
+  async getSettings(@Query() id: string) {
+    return this.settingsService.getSettings(id);
   }
 }
