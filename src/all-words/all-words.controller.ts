@@ -1,14 +1,11 @@
-import { UserWords } from './../types/user';
 import { AllWordService } from './all-words.service';
 import {
-  Body,
   Controller,
   Get,
   Query,
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { query } from 'express';
 
 @Controller('words')
 export class AllWordsController {

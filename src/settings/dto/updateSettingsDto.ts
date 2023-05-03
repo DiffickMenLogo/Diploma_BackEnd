@@ -1,5 +1,3 @@
-import { IsString, isString, IsUUID } from 'class-validator';
-
 export class UpdateSettingsDto {
   userId: string;
 

@@ -1,5 +1,4 @@
 import { createUserWordDto } from './dto/createUserWordDto';
-import { createUserDto } from './../user/dto/createUserDto';
 import { WordsEntity } from './entities/words.entity';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';

@@ -1,10 +1,9 @@
 import { UserResponse } from './../types/user';
-import { UpdateUserDto } from './dto/updateUserDto';
 import { createUserDto } from './dto/createUserDto';
 import { UserEntity } from './entities/user.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User, UserSignResponse } from 'src/types/user';
+import { User } from 'src/types/user';
 import { Repository } from 'typeorm';
 import { randomUUID } from 'crypto';
 import * as bcrypt from 'bcryptjs';

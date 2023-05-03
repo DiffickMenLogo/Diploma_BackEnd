@@ -1,5 +1,4 @@
 import { CreateStatisticsDto } from './dto/createSettingsDto';
-import { CreateSettingsDto } from './../settings/dto/createSettingsDto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserStatistic } from 'src/types/user';

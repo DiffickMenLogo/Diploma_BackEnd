@@ -1,4 +1,3 @@
-import { CreateSettingsDto } from './dto/createSettingsDto';
 import { SettingsEntity } from './entities/settings.entity';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
