@@ -39,7 +39,7 @@ export class SettingsService {
 
   async updateSettings(body: UpdateSettingsDto): Promise<UserSettings> {
     const userSettings = await this.settingsRepository.findOne({
-      where: { userId: body.id },
+      where: { userId: body.userId },
     });
 
     if (!userSettings) {
@@ -53,6 +53,8 @@ export class SettingsService {
     }
 
     const newSettings = {
+      id: userSettings.id,
+      userId: userSettings.userId,
       soundVolume: body.soundVolume
         ? body.soundVolume
         : userSettings.soundVolume,
@@ -61,19 +63,21 @@ export class SettingsService {
         : userSettings.musicVolume,
       wordVolume: body.wordVolume ? body.wordVolume : userSettings.wordVolume,
       difficultWord:
-        body.difficultWord === null
-          ? userSettings.difficultWord
-          : body.difficultWord,
+        body.difficultWord !== undefined
+          ? body.difficultWord
+          : userSettings.difficultWord,
       deleteWord:
-        body.deleteWord === null ? userSettings.deleteWord : body.deleteWord,
+        body.deleteWord !== undefined
+          ? body.deleteWord
+          : userSettings.deleteWord,
       translateWord:
-        body.translateWord === null
-          ? userSettings.translateWord
-          : body.translateWord,
+        body.translateWord !== undefined
+          ? body.translateWord
+          : userSettings.translateWord,
       translateSentences:
-        body.translateSentences === null
-          ? userSettings.translateSentences
-          : body.translateSentences,
+        body.translateSentences !== undefined
+          ? body.translateSentences
+          : userSettings.translateSentences,
       theme: body.theme ? body.theme : userSettings.theme,
     };
 
