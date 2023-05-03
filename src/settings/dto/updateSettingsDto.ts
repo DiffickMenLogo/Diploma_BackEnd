@@ -1,8 +1,9 @@
-import { isString, IsUUID } from 'class-validator';
+import { IsString, isString, IsUUID } from 'class-validator';
 
 export class UpdateSettingsDto {
   id: string;
 
+  @IsString()
   userId: string;
 
   soundVolume?: number;

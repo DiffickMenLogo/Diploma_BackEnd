@@ -11,13 +11,13 @@ export class UserWordsController {
     return this.userWordsService.createUserWord(body);
   }
 
-  @Get(':id')
-  getUserWords(@Query() id: string) {
+  @Get()
+  getUserWords(@Query('id') id: string) {
     return this.userWordsService.getUserWords(id);
   }
 
-  @Delete(':id')
-  deleteUserWord(@Query() id: string) {
+  @Delete()
+  deleteUserWord(@Query('id') id: string) {
     return this.userWordsService.deleteUserWord(id);
   }
 }

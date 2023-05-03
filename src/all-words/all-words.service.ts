@@ -14,7 +14,6 @@ export class AllWordService {
 
   async seedData(): Promise<void> {
     const words = await this.wordRepository.find();
-    console.log(words);
     if (words.length === 0) {
       const jsonData = fs.readFileSync(path.resolve('src', 'allWords.json'));
       const data = JSON.parse(jsonData.toString());

@@ -11,8 +11,8 @@ export class StatisticsController {
     return this.statisticsService.createStatistics(body);
   }
 
-  @Get(':id')
-  async getStatistics(@Query() id: string) {
+  @Get()
+  async getStatistics(@Query('id') id: string) {
     return this.statisticsService.getStatistics(id);
   }
 }
