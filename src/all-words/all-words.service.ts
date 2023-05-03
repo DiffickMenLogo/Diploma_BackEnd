@@ -13,26 +13,30 @@ export class AllWordService {
   ) {}
 
   async seedData(): Promise<void> {
-    const jsonData = fs.readFileSync(path.resolve('src', 'allWords.json'));
-    const data = JSON.parse(jsonData.toString());
+    const words = await this.wordRepository.find();
+    console.log(words);
+    if (words.length === 0) {
+      const jsonData = fs.readFileSync(path.resolve('src', 'allWords.json'));
+      const data = JSON.parse(jsonData.toString());
 
-    for (const item of data) {
-      const word = new WordEntity();
-      word.group = item.group;
-      word.page = item.page;
-      word.word = item.word;
-      word.image = item.image;
-      word.audio = item.audio;
-      word.audioMeaning = item.audioMeaning;
-      word.audioExample = item.audioExample;
-      word.textMeaning = item.textMeaning;
-      word.textExample = item.textExample;
-      word.transcription = item.transcription;
-      word.textExampleTranslate = item.textExampleTranslate;
-      word.textMeaningTranslate = item.textMeaningTranslate;
-      word.wordTranslate = item.wordTranslate;
+      for (const item of data) {
+        const word = new WordEntity();
+        word.group = item.group;
+        word.page = item.page;
+        word.word = item.word;
+        word.image = item.image;
+        word.audio = item.audio;
+        word.audioMeaning = item.audioMeaning;
+        word.audioExample = item.audioExample;
+        word.textMeaning = item.textMeaning;
+        word.textExample = item.textExample;
+        word.transcription = item.transcription;
+        word.textExampleTranslate = item.textExampleTranslate;
+        word.textMeaningTranslate = item.textMeaningTranslate;
+        word.wordTranslate = item.wordTranslate;
 
-      await this.wordRepository.save(word);
+        await this.wordRepository.save(word);
+      }
     }
   }
 
