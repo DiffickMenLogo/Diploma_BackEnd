@@ -9,7 +9,7 @@ export class SettingsController {
   async changeSettings(@Body() body: UpdateSettingsDto) {
     return this.settingsService.updateSettings(body);
   }
-  @Get(':/id')
+  @Get(':id')
   async getSettings(@Query() id: string) {
     return this.settingsService.getSettings(id);
   }
