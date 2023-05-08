@@ -11,10 +11,10 @@ export class WordsService {
     private readonly wordsRepository: Repository<WordsEntity>,
   ) {}
 
-  async createUserWord(word: createUserWordDto): Promise<void> {
+  async createUserWord(word: createUserWordDto): Promise<WordsEntity> {
     const createdWord = await this.wordsRepository.create(word);
 
-    await this.wordsRepository.save(createdWord);
+    return await this.wordsRepository.save(createdWord);
   }
 
   async getUserWords(id: string): Promise<WordsEntity[]> {
