@@ -12,8 +12,8 @@ export class StatisticsService {
     private readonly statisticsRepository: Repository<StatisticsEntity>,
   ) {}
 
-  async getStatistics(id: string): Promise<UserStatistic> {
-    const statistics = await this.statisticsRepository.findOne({
+  async getStatistics(id: string): Promise<UserStatistic[]> {
+    const statistics = await this.statisticsRepository.find({
       where: { userId: id },
     });
     return statistics;
