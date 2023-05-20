@@ -1,8 +1,9 @@
 import { createUserWordDto } from './dto/createUserWordDto';
 import { WordsEntity } from './entities/words.entity';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Body } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { changeUserWordDto } from './dto/changeUserWordDto';
 
 @Injectable()
 export class WordsService {
@@ -32,6 +33,18 @@ export class WordsService {
       throw new HttpException('Word NotFound', HttpStatus.NOT_FOUND);
     } else {
       await this.wordsRepository.delete(userWord);
+      return userWord;
+    }
+  }
+
+  async changeUserWord(body: changeUserWordDto): Promise<WordsEntity> {
+    const userWord = await this.wordsRepository.findOne({
+      where: { id: body.id },
+    });
+    if (!userWord) {
+      throw new HttpException('Word NotFound', HttpStatus.NOT_FOUND);
+    } else {
+      await this.wordsRepository.save(body);
       return userWord;
     }
   }
